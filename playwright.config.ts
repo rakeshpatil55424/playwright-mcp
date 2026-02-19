@@ -19,6 +19,11 @@ import { defineConfig } from '@playwright/test';
 import type { TestOptions } from './tests/fixtures';
 
 export default defineConfig<TestOptions>({
+  reporter: [
+    ['html'],                // HTML report
+    ['json', { outputFile: 'test-results.json' }],
+    ['junit', { outputFile: 'junit-results.xml' }]
+  ],
   testDir: './tests',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
