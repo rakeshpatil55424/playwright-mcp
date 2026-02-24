@@ -23,16 +23,28 @@ export default defineConfig<TestOptions>({
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   workers: process.env.CI ? 2 : undefined,
-  reporter: 'list',
+
+  // Retries
+  retries: 3,
+
+  // Reporters
+  reporter: [
+    ['list'],  // console output
+    ['html'],  // HTML report
+    ['json', { outputFile: 'test-results.json' }],
+    ['junit', { outputFile: 'junit-results.xml' }]
+  ],
+
   projects: [
     { name: 'chrome' },
-    ...process.env.MCP_IN_DOCKER ? [{
+
+    ...(process.env.MCP_IN_DOCKER ? [{
       name: 'chromium-docker',
       grep: /browser_navigate|browser_click/,
       use: {
         mcpBrowser: 'chromium',
         mcpMode: 'docker' as const
       }
-    }] : [],
+    }] : []),
   ],
 });
