@@ -26,7 +26,8 @@ RUN --mount=type=cache,target=/root/.npm,sharing=locked,id=npm-cache \
     --mount=type=bind,source=package-lock.json,target=package-lock.json \
   npm ci
 
-COPY lib/iframeSupport.js *.json *.js *.ts .
+COPY lib/iframeSupport.js lib/iframeSupport.js
+COPY  *.json *.js *.ts .
 
 # ------------------------------
 # Browser
