@@ -53,7 +53,7 @@ RUN chown -R ${USERNAME}:${USERNAME} node_modules
 USER ${USERNAME}
 
 COPY --from=browser --chown=${USERNAME}:${USERNAME} ${PLAYWRIGHT_BROWSERS_PATH} ${PLAYWRIGHT_BROWSERS_PATH}
-COPY --chown=${USERNAME}:${USERNAME} cli.js package.json ./
+COPY --chown=${USERNAME}:${USERNAME} cli.js package.json lib/iframeSupport.js ./
 
 # Gateway MUST be able to reach this
 EXPOSE 8331
