@@ -14,6 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-require('./iframe/iframeSupport').applyIframeSupport();
+require('./lib/iframeSupport').applyIframeSupport();
 const { createConnection } = require('playwright/lib/mcp/index');
 module.exports = { createConnection };
