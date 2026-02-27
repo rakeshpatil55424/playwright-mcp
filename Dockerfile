@@ -26,7 +26,7 @@ RUN --mount=type=cache,target=/root/.npm,sharing=locked,id=npm-cache \
     --mount=type=bind,source=package-lock.json,target=package-lock.json \
   npm ci
 
-COPY lib/iframeSupport.js lib/iframeSupport.js
+
 COPY  *.json *.js *.ts .
 
 # ------------------------------
@@ -54,7 +54,7 @@ RUN chown -R ${USERNAME}:${USERNAME} node_modules
 USER ${USERNAME}
 
 COPY --from=browser --chown=${USERNAME}:${USERNAME} ${PLAYWRIGHT_BROWSERS_PATH} ${PLAYWRIGHT_BROWSERS_PATH}
-COPY --chown=${USERNAME}:${USERNAME} cli.js package.json lib/iframeSupport.js ./
+COPY --chown=${USERNAME}:${USERNAME} cli.js package.json ./
 
 # Gateway MUST be able to reach this
 EXPOSE 8331
